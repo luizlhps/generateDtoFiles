@@ -1,0 +1,16 @@
+{
+  "name": "generatordto",
+  "version": "1.0.0",
+  "description": "criador de dtos para typescript e csharp",
+  "main": "generateFiles.js",
+  "type": "module",
+  "scripts": {
+    "start": "node generateFiles.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "luizlhps",
+  "license": "MIT",
+  "dependencies": {
+    "csharp-to-typescript": "^0.12.0"
+  }
+}
