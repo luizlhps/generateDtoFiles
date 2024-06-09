@@ -39,9 +39,8 @@ const createFiles = async (prefix, fileString) => {
   const pastaTSDto = path.join(__dirname, 'ts');
   const pastaSharpDto = path.join(__dirname, 'csharp');
 
-  // Caminho completo do arquivo
-  const filePathCsharp = path.join(pastaSharpDto, fileNameCsharp);
-  const filePathTS = path.join(pastaTSDto, fileNameCsharp);
+  createDirectoryIfNotExists(pastaTSDto);
+  createDirectoryIfNotExists(pastaSharpDto);
 
   clearFiles(pastaTSDto);
   clearFiles(pastaSharpDto);
@@ -50,6 +49,10 @@ const createFiles = async (prefix, fileString) => {
   suffixes.forEach((suffix) => {
     const fileNameCsharp = `${prefix}${suffix}Dto.cs`;
     const fileNameTypescript = `${prefix}${suffix}Dto.ts`;
+
+    // Caminho completo do arquivo
+    const filePathCsharp = path.join(pastaSharpDto, fileNameCsharp);
+    const filePathTS = path.join(pastaTSDto, fileNameCsharp);
 
     // Conteúdo do arquivo
     const content = `public class ${prefix}${suffix}Dto 
@@ -119,6 +122,16 @@ const clearFiles = async (folderPath) => {
   }
 
   console.log(`${folderPath}: Arquivos antigos deletados`);
+};
+
+const createDirectoryIfNotExists = (folderPath) => {
+  fs.mkdir(folderPath, { recursive: true }, (err) => {
+    if (err) {
+      console.error('Erro ao criar o diretório:', err);
+    } else {
+      console.log(`Diretório '${folderPath}' criado com sucesso ou já existe.`);
+    }
+  });
 };
 
 main();
